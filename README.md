@@ -33,7 +33,7 @@ External libraries:
 2. Install the standard ESP libraries either using the Arduino IDE or directly from [Espressif](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/).
 3. Install the required external libraries.
 4. Download the repository and flash the ESP32:
-    - For VSCode, modify the *arduino.json* and *c_cpp_properties.json* files to add the missing libraries.
+    - For VSCode, modify the *arduino.json* and *c_cpp_properties.json* files to add the missing libraries and select the desired .ino file.
     - For the Arduino IDE, change the *src* folder to match the name of the *.ino* file.
 
 ## License
