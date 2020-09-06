@@ -1,0 +1,9 @@
+# KDE
+.directory
+
+# VSCode configuration files
+.vscode/
+*.code-workspace
+
+# Compiled files
+build/
