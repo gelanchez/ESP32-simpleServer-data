@@ -7,17 +7,17 @@
  * @copyright GPL-3.0
  */
 
-#include "constants.h"
+//#include "constants.h"
 
 void setup()
 {
-    pinMode(Constants::ledPin, OUTPUT);
+    //pinMode(Constants::ledPin, OUTPUT);
 }
 
 void loop()
 {
-    digitalWrite(Constants::ledPin, HIGH);
+    //digitalWrite(Constants::ledPin, HIGH);
     delay(1000);
-    digitalWrite(Constants::ledPin, LOW);
+    //digitalWrite(Constants::ledPin, LOW);
     delay(1000);
 }
