@@ -7,3 +7,9 @@
 
 # Compiled files
 build/
+
+# Documentation
+doc/
+
+# html tests
+html-test/
