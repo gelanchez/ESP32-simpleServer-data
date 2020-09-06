@@ -16,7 +16,7 @@ The following parts have been used in the electronic circuit. Nevertheless, they
 - 1x 10 k<span>&#8486;</span> resistance.
 
 ESP32 pins in the schematic are referred as 3.3V, GND and D?.
-![Schematic](./ESP32_webservers_schem.svg)
+<img src="./ESP32_webservers_schem.svg" alt="Electrical schematic" width="1000" height="auto" >
 
 ## Requirements
 ESP32 libraries:
