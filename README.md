@@ -22,9 +22,9 @@ ESP32 pins in the schematic are referred as 3.3V, GND and D*.
 ESP32 libraries:
 - [WiFi.h](https://github.com/espressif/arduino-esp32/tree/master/libraries/WiFi)
 - [WebServer](https://github.com/espressif/arduino-esp32/tree/master/libraries/WebServer).
-- [AsyncTCP](https://github.com/me-no-dev/AsyncTCP). Async TCP Library for ESP32.
 
 External libraries:
+- [AsyncTCP](https://github.com/me-no-dev/AsyncTCP). Async TCP Library for ESP32.
 - [ArduinoJson](https://arduinojson.org). JSON library for embedded C++.
 - [ESPAsyncWebServer](https://github.com/me-no-dev/ESPAsyncWebServer). Async HTTP and WebSocket Server.
 
