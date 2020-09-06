@@ -1,5 +1,5 @@
 # ESP32-webservers
-This repository contains several webservers for the ESP32 microcontroller used to control a LED and read sensors through websockets. The ESP32 is be connected to the WiFi network and uses the same electronic circtuit as a base for all the webservers.
+This repository contains several webservers for the ESP32 microcontroller used to control a LED and read sensors through websockets. The ESP32 is connected to a WiFi network and uses the same electronic circtuit as a base for all the webservers.
 
 ## Webservers
 3 webservers using the same base electronic schematic are implemented:
@@ -15,8 +15,9 @@ The following parts have been used in the electronic circuit. Nevertheless, they
 - 2x 1 k<span>&#8486;</span> resistances.
 - 1x 10 k<span>&#8486;</span> resistance.
 
-ESP32 pins in the schematic are referred as 3.3V, GND and D?.
-<img src="./ESP32_webservers_schem.svg" alt="Electrical schematic" width="1000" height="auto" >
+<img src="./ESP32_webservers_schem.svg" alt="Electrical schematic" width="100%" height="auto" >
+<br>
+(ESP32 pins in the schematic are referred as *3.3V*, *GND* and *D?*)
 
 ## Requirements
 ESP32 libraries:
@@ -34,7 +35,7 @@ External libraries:
 3. Install the required external libraries.
 4. Download the repository and flash the ESP32:
     - For VSCode, modify the *arduino.json* and *c_cpp_properties.json* files to add the missing libraries.
-    - For the Arduino IDE, put the *.ino* file you want to use in a folder of the same name.
+    - For the Arduino IDE, change the *src* folder to match the name of the *.ino* file.
 
 ## License
 [GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/)
