@@ -1,7 +1,7 @@
 /**
- * @file constants-TEMPLATE.h
+ * @file constants.h
  * @author José Ángel Sánchez (https://github.com/gelanchez)
- * @brief File to be renamed as constants.h, setting the SSID and PASSWORD.
+ * @brief Constants used along the program.
  * @version 0.0.1
  * @date 2020-09-06
  * @copyright GPL-3.0
@@ -15,7 +15,7 @@
 namespace Constants
 {
     // LED
-    const uint8_t ledPin(4);  // Connected through a resistance.
+    const uint8_t ledPin(4);
 
     // WiFI parameters (TO BE MODIFIED)
     const char ssid[] = "SSID";

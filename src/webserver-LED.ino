@@ -8,9 +8,22 @@
  */
 
 #include "constants.h"
+#include <WiFi.h>
 
 void setup()
 {
+    Serial.begin(115200);
+    delay(1000);
+
+    WiFi.config(Constants::ip, Constants::gateway, Constants::subnet);
+    WiFi.begin(Constants::ssid, Constants::password);
+    while(WiFi.status() != WL_CONNECTED)
+        delay(1000);
+    Serial.print("Connected to WiFi ");
+    Serial.print(Constants::ssid);
+    Serial.print(" as ");
+    Serial.println(WiFi.localIP());
+
     pinMode(Constants::ledPin, OUTPUT);
 }
 
