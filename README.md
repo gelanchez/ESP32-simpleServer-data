@@ -7,6 +7,8 @@ This repository contains several webservers for the ESP32 microcontroller used t
 - *webserver-data*. Using an Async HTTP and WebSocket server, the processed readings from a thermistor and a photoresistor will be transmitted to the clients through websockets in a JSON format and presented live with [charts.js](https://www.chartjs.org/). **TO BE IMPLEMENTED.**
 - *webserver*. This server combines the functionality of *webserver-LED* and *webserver-data*, controlling the LED and sending data to the clients using an async HTTP and WebSocket server. **TO BE IMPLEMENTED.**
 
+[Bootstrap](https://getbootstrap.com/), the CSS framework, will be used to decorate the webpages.
+
 ## Schematic
 The following parts have been used in the electronic circuit. Nevertheless, they can be replaced for other similar ones with little change in the code.
 - 1x LED.
