@@ -3,7 +3,7 @@ This repository contains several webservers for the ESP32 microcontroller used t
 
 ## Webservers
 3 webservers using the same base electronic schematic are implemented:
-- *webserver-LED*. Using a simple WebServer, a LED can be switched on and off from the clients. **TO BE IMPLEMENTED.**
+- *webserver-LED*. Using a simple WebServer, which supports only one simultaneous client, a LED can be switched on and off from. **TO BE IMPLEMENTED.**
 - *webserver-data*. Using an Async HTTP and WebSocket server, the processed readings from a thermistor and a photoresistor will be transmitted to the clients through websockets in a JSON format and presented live with [charts.js](https://www.chartjs.org/). **TO BE IMPLEMENTED.**
 - *webserver*. This server combines the functionality of *webserver-LED* and *webserver-data*, controlling the LED and sending data to the clients using an async HTTP and WebSocket server. **TO BE IMPLEMENTED.**
 

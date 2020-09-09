@@ -8,7 +8,10 @@
  */
 
 #include "constants.h"
+#include <WebServer.h>
 #include <WiFi.h>
+
+WebServer server(80);
 
 void setup()
 {
@@ -25,12 +28,22 @@ void setup()
     Serial.println(WiFi.localIP());
 
     pinMode(Constants::ledPin, OUTPUT);
+
+    server.onNotFound(handle_notFound);
+    server.begin();
 }
 
 void loop()
 {
+    server.handleClient();
+
     digitalWrite(Constants::ledPin, HIGH);
     delay(1000);
     digitalWrite(Constants::ledPin, LOW);
     delay(1000);
+}
+
+void handle_notFound()
+{
+    server.send(404, "text/plain", "Not found");
 }
