@@ -11,5 +11,8 @@ build/
 # Documentation
 doc/
 
-# html tests
-html-test/
+# Constants file containing passwords
+src/constants.h
+
+# Other
+TODO.md
