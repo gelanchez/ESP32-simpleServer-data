@@ -7,12 +7,14 @@
  * @copyright GPL-3.0
  */
 
+#include <ArduinoJson.h>
 #include "constants.h"
 #include "index_LED.h"
 #include <WebServer.h>
 #include <WiFi.h>
 
 bool ledStatus(LOW);
+StaticJsonDocument<150> ledJson;
 
 WebServer server(80);
 
@@ -35,7 +37,8 @@ void setup()
     server.onNotFound(handle_notFound);
     server.on("", handle_index);
     server.on("/", handle_index);
-    server.on("/changeled", handle_changeled);
+    server.on("/changeled", handle_changeLed);
+    server.on("/_led_status", handle_ledStatus);
 
     server.begin();
 }
@@ -60,7 +63,15 @@ void handle_index()
     server.send(200, "text/html", MAIN_LED);
 }
 
-void handle_changeled()
+void handle_changeLed()
 {
     ledStatus = !ledStatus;
+}
+
+void handle_ledStatus()
+{
+    String output;
+    ledJson["ledStatus"] = ledStatus;
+    serializeJson(ledJson, output);
+    server.send(200, "text/json", output);
 }
