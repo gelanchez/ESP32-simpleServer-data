@@ -2,7 +2,6 @@
 #define INDEX_LED
 
 const char MAIN_LED[] PROGMEM = R"=====(
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,14 +20,13 @@ const char MAIN_LED[] PROGMEM = R"=====(
 <body>
     <h4>ESP32 LED control</h4>
 
-    <form action="/changeled" method="post">
-        <input class="btn btn-primary btn-lg" type="submit" value="Change LED">
-    </form>
+    <input class="btn btn-primary btn-lg" type="submit" value="Change LED" onclick="clickButton();">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    <!-- Not using the jQuery slim version as it doesn't have AJAX-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
@@ -36,10 +34,21 @@ const char MAIN_LED[] PROGMEM = R"=====(
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function clickButton(){
+            $.ajax({
+                type: "post",
+                url: "/changeled",
+                data: {},
+                success: {}
+
+            });
+        }
+    
+    </script>
 </body>
 
 </html>
-
 
 )=====";
 
