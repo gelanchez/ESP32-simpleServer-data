@@ -20,7 +20,7 @@ const char MAIN_LED[] PROGMEM = R"=====(
 <body>
     <h4>ESP32 LED control</h4>
 
-    <input class="btn btn-primary btn-lg" type="submit" value="Change LED" onclick="changeLed();">
+    <input id ="ledbutton" class="btn btn-dark btn-lg" type="submit" value="Switch LED on" onclick="changeLed();">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -50,10 +50,26 @@ const char MAIN_LED[] PROGMEM = R"=====(
                 url: "/_led_status",
                 dataType: "json",
                 success: function(data){
-                    console.log(data);
+                    // const jsondata = JSON.parse(data);  // Not necessary as AJAX dataType is json
+                    if (data.ledStatus == true){
+                        updateButton(true);
+                    }
+                    else {
+                        updateButton(false);
+                    }
                 }
             });
-        } 
+        }
+        function updateButton(ledStatus){
+            if (ledStatus){
+                document.getElementById("ledbutton").className = "btn btn-warning btn-lg";
+                document.getElementById("ledbutton").value = "Switch LED off";
+            }
+            else {
+                document.getElementById("ledbutton").className = "btn btn-dark btn-lg";
+                document.getElementById("ledbutton").value = "Switch LED on";
+            }
+        }
     </script>
 </body>
 
