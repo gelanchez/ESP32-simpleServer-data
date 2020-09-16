@@ -10,8 +10,8 @@
 #include <ArduinoJson.h>
 #include "constants.h"
 #include "index_LED.h"
+#include "utils.h"
 #include <WebServer.h>
-#include <WiFi.h>
 
 bool ledStatus(LOW);
 StaticJsonDocument<150> ledJson;
@@ -23,14 +23,7 @@ void setup()
     Serial.begin(115200);
     delay(1000);
 
-    WiFi.config(Constants::ip, Constants::gateway, Constants::subnet);
-    WiFi.begin(Constants::ssid, Constants::password);
-    while(WiFi.status() != WL_CONNECTED)
-        delay(1000);
-    Serial.print("Connected to WiFi ");
-    Serial.print(Constants::ssid);
-    Serial.print(" as ");
-    Serial.println(WiFi.localIP());
+    Utils::wifiConnect();
 
     pinMode(Constants::ledPin, OUTPUT);
 
