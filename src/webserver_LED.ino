@@ -1,5 +1,5 @@
 /**
- * @file webserver-LED.ino
+ * @file webserver_LED.ino
  * @author José Ángel Sánchez (https://github.com/gelanchez)
  * @brief Using WebServer, a LED can be switched on and off from the client.
  * @version 0.0.1
