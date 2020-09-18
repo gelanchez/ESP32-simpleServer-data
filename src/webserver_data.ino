@@ -11,7 +11,15 @@
 #ifndef ESP32
 #define ESP32
 
+#include <ArduinoJson.h>
+#include "constants.h"
+#include "mysensors.h"
 #include "utils.h"
+
+Photoresistor photoresistor(Constants::photoresistorPin);
+Thermistor thermistor(Constants::thermistorPin);
+
+StaticJsonDocument<150> doc;
 
 void setup()
 {
@@ -20,12 +28,23 @@ void setup()
 
     Utils::wifiConnect();
 
-
 }
 
 void loop()
 {
+    static unsigned long lastUpdate = millis();
+    if ((millis() - lastUpdate) > 100)
+    {
+        lastUpdate = millis();
+        doc["illuminance"] = photoresistor.read();
+        doc["temperature"] = thermistor.read();
 
+        //serializeJson(doc, Serial);
+        //Serial.println();
+
+        String output;
+        serializeJson(doc, output);
+    }
 }
 
 #endif
