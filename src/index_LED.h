@@ -10,7 +10,7 @@
 #ifndef INDEX_LED_H
 #define INDEX_LED_H
 
-const char MAIN_LED[] PROGMEM = R"=====(
+const char INDEX_LED[] PROGMEM = R"=====(
 <!DOCTYPE html>
 <html lang="en">
 

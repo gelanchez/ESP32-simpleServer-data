@@ -53,7 +53,7 @@ void handle_notFound()
 
 void handle_index()
 {
-    server.send(200, "text/html", MAIN_LED);
+    server.send(200, "text/html", INDEX_LED);
 }
 
 void handle_changeLed()
