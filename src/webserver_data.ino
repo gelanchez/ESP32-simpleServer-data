@@ -13,6 +13,7 @@
 
 #include <ArduinoJson.h>
 #include "constants.h"
+#include <ESPAsyncWebServer.h>
 #include "mysensors.h"
 #include "utils.h"
 
@@ -21,6 +22,8 @@ Thermistor thermistor(Constants::thermistorPin);
 
 StaticJsonDocument<150> doc;
 
+AsyncWebServer server(80);
+
 void setup()
 {
     Serial.begin(115200);
@@ -28,6 +31,10 @@ void setup()
 
     Utils::wifiConnect();
 
+    server.on("/hello", HTTP_GET, [](AsyncWebServerRequest *request){
+        request->send(200, "text/plain", "Hello World");});
+    
+    server.begin();
 }
 
 void loop()
