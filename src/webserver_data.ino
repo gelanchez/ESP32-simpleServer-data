@@ -14,6 +14,7 @@
 #include <ArduinoJson.h>
 #include "constants.h"
 #include <ESPAsyncWebServer.h>
+#include "index_data.h"  // HTML webpage contents with javascripts
 #include "mysensors.h"
 #include "utils.h"
 
@@ -32,7 +33,12 @@ void setup()
     Utils::wifiConnect();
 
     server.on("/hello", HTTP_GET, [](AsyncWebServerRequest *request){
-        request->send(200, "text/plain", "Hello World");});
+        request->send(200, "text/plain", "Hello World");
+        });
+    
+    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+        request->send_P(200, "text/html", MAIN_page);
+        });
     
     server.begin();
 }
