@@ -2,8 +2,8 @@
  * @file constants.h
  * @author José Ángel Sánchez (https://github.com/gelanchez)
  * @brief Constants used along the program.
- * @version 0.0.2
- * @date 2020-09-16
+ * @version 0.0.3
+ * @date 2020-09-20
  * @copyright GPL-3.0
  */
 
@@ -12,8 +12,23 @@
 
 #include <WiFi.h>
 
+/**
+ * @brief Types of server that can be used
+ */
+enum class ServerType
+{
+    SIMPLE_WEBSERVER,
+    ASYNC_WEBSERVER
+};
+
+/**
+ * @brief Constants
+ */
 namespace Constants
 {
+    // Server type (TO BE MODIFIED)
+    const ServerType serverType(ServerType::SIMPLE_WEBSERVER);
+
     // ESP32 constants
     const uint16_t resolution(4095);  // Max analog value
     const float maxVoltage(3.3);  // Max voltage

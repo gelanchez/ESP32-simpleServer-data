@@ -39,7 +39,7 @@ External libraries:
 3. Install the required external libraries.
 4. Download the repository and rename the file *constants.h.TEMPLATE* to *constants.h*.
     - Change the SSID and PASSWORD correspoding to the WiFi network. 
-    - Select 1 or 2 for the WEBSERVER_TYPE variable depending on the server type.
+    - Modify the constant *serverType*, choosing between *SIMPLE_WEBSERVER* or *ASYNC_WEBSERVER* to choose the default webserver.
 5. Flash the ESP32:
     - For VSCode, modify the *arduino.json* and *c_cpp_properties.json* files to add the missing libraries.
     - For the Arduino IDE, change the *src* folder to match the name of the *.ino* file.
