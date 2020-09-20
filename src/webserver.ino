@@ -25,31 +25,19 @@
 Photoresistor photoresistor(Constants::photoresistorPin);
 Thermistor thermistor(Constants::thermistorPin);
 
+ParentServer webserver = ParentServer();
 
 void setup()
 {
     Serial.begin(115200);
     delay(1000);
 
-    /**
-     * @brief WiFi network connection
-     */
-    WiFi.config(Constants::ip, Constants::gateway, Constants::subnet);
-    WiFi.begin(Constants::ssid, Constants::password);
-    while (WiFi.status() != WL_CONNECTED)
-        delay(1000);
-    Serial.print("Connected to WiFi ");
-    Serial.print(Constants::ssid);
-    Serial.print(" as ");
-    Serial.println(WiFi.localIP());
-
+    webserver.wifiConnect();
 }
 
 void loop()
 {
 
 }
-
-
 
 #endif

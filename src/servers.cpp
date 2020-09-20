@@ -7,26 +7,43 @@
  * @copyright GPL-3.0
  */
 
+#include "constants.h"
 #include "servers.h"
+#include <WiFi.h>
 
-Server::Server()
+ParentServer::ParentServer()
+{
+    if (Constants::serverType == ServerType::SIMPLE_WEBSERVER)
+        SimpleServer();
+    else if (Constants::serverType == ServerType::ASYNC_WEBSERVER)
+        AsyncServer();
+}
+
+ParentServer::~ParentServer()
 {
 }
 
-Server::~Server()
+void ParentServer::setup()
 {
 }
 
-void Server::setup()
+void ParentServer::loop()
 {
 }
 
-void Server::loop()
+/**
+ * @brief WiFi network connection
+ */
+void ParentServer::wifiConnect()
 {
-}
-
-void Server::wifiConnect()
-{
+    WiFi.config(Constants::ip, Constants::gateway, Constants::subnet);
+    WiFi.begin(Constants::ssid, Constants::password);
+    while (WiFi.status() != WL_CONNECTED)
+        delay(1000);
+    Serial.print("Connected to WiFi ");
+    Serial.print(Constants::ssid);
+    Serial.print(" as ");
+    Serial.println(WiFi.localIP());
 }
 
 

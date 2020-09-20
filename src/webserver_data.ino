@@ -14,7 +14,7 @@
 #include <ArduinoJson.h>
 #include "constants.h"
 #include <ESPAsyncWebServer.h>
-#include "index_data.h"  // HTML webpage contents with javascripts
+#include "index.h"  // HTML webpage contents with javascripts
 #include "mysensors.h"
 #include "utils.h"
 
@@ -37,7 +37,7 @@ void setup()
         });
     
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-        request->send_P(200, "text/html", MAIN_page);
+        request->send_P(200, "text/html", MAIN_page_async);
         });
     
     server.begin();

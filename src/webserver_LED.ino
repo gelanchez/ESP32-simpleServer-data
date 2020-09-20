@@ -9,7 +9,7 @@
 
 #include <ArduinoJson.h>
 #include "constants.h"
-#include "index_LED.h"
+#include "index.h"
 #include "utils.h"
 #include <WebServer.h>
 
@@ -53,7 +53,7 @@ void handle_notFound()
 
 void handle_index()
 {
-    server.send(200, "text/html", MAIN_page);
+    server.send(200, "text/html", MAIN_page_simple);
 }
 
 void handle_changeLed()

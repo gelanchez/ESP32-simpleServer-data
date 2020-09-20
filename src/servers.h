@@ -10,40 +10,42 @@
 #ifndef SERVERS_H
 #define SERVERS_H
 
-class Server
+#include "constants.h"
+
+class ParentServer
 {
     private:
     protected:
     public:
-        Server();
-        ~Server();
+        ParentServer();
+        ~ParentServer();
         virtual void setup();
         virtual void loop();
         void wifiConnect();
 };
 
 
-class SimpleServer: public Server
+class SimpleServer: public ParentServer
 {
     private:
     protected:
     public:
         SimpleServer();
         ~SimpleServer();
-        virtual void setup();
-        virtual void loop();
+        virtual void setup() override;
+        virtual void loop() override;
 };
 
 
-class AsyncServer: public Server
+class AsyncServer: public ParentServer
 {
     private:
     protected:
     public:
         AsyncServer();
         ~AsyncServer();
-        virtual void setup();
-        virtual void loop();
+        virtual void setup() override;
+        virtual void loop() override;
 
 };
 
