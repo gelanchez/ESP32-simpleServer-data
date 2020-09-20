@@ -1,11 +1,11 @@
 # ESP32-webservers
-This repository contains several webservers for the ESP32 microcontroller used to control a LED and read sensors through websockets. The ESP32 is connected to a WiFi network and uses the same electronic circtuit as a base for all the webservers.
+This repository contains several webservers for the ESP32 microcontroller. The ESP32 is used to control a LED and read and process the values from a thermistor and a photoresistor. The control and values are sent to the clients connected to the webservers either using AJAX or websockets. The ESP32 is connected to a WiFi network and uses the same electronic circtuit as a base for all the webservers.
 
 ## Webservers
 3 webservers using the same base electronic schematic are implemented:
 - *webserver_LED*. Using a simple WebServer, which supports only one simultaneous client, a LED can be switched on and off from. jQuery AJAX with JSON is used for client-server communications.
 - *webserver_data*. Using an Async HTTP and WebSocket server, the processed readings from a thermistor and a photoresistor will be transmitted to the clients through websockets in a JSON format and presented live with [charts.js](https://www.chartjs.org/). **TO BE IMPLEMENTED.**
-- *webserver*. This server combines the functionality of *webserver-LED* and *webserver-data*, controlling the LED and sending data to the clients using an async HTTP and WebSocket server. **TO BE IMPLEMENTED.**
+- *webserver*. This server combines the functionality of *webserver-LED* and *webserver-data*, controlling the LED and sending the readings from the sensors to the clients using an async HTTP and WebSocket server. **TO BE IMPLEMENTED.**
 
 [Bootstrap](https://getbootstrap.com/), the CSS framework, will be used to decorate the webpages.
 

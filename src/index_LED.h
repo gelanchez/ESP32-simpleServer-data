@@ -1,7 +1,16 @@
-#ifndef INDEX_LED
-#define INDEX_LED
+/**
+ * @file index_LED.h
+ * @author José Ángel Sánchez (https://github.com/gelanchez)
+ * @brief html for the webserver_LED.ino
+ * @version 0.0.1
+ * @date 2020-09-15
+ * @copyright GPL-3.0
+ */
 
-const char MAIN_LED[] PROGMEM = R"=====(
+#ifndef INDEX_LED_H
+#define INDEX_LED_H
+
+const char MAIN_page[] PROGMEM = R"=====(
 <!DOCTYPE html>
 <html lang="en">
 
