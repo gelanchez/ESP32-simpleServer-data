@@ -11,6 +11,7 @@
 #define SERVERS_H
 
 #include "constants.h"
+#include <WebServer.h>
 
 class ParentServer
 {
@@ -28,6 +29,7 @@ class ParentServer
 class SimpleServer: public ParentServer
 {
     private:
+        WebServer server;
     protected:
     public:
         SimpleServer();

@@ -9,14 +9,11 @@
 
 #include "constants.h"
 #include "servers.h"
+#include <WebServer.h>
 #include <WiFi.h>
 
 ParentServer::ParentServer()
 {
-    if (Constants::serverType == ServerType::SIMPLE_WEBSERVER)
-        SimpleServer();
-    else if (Constants::serverType == ServerType::ASYNC_WEBSERVER)
-        AsyncServer();
 }
 
 ParentServer::~ParentServer()
@@ -47,8 +44,9 @@ void ParentServer::wifiConnect()
 }
 
 
-SimpleServer::SimpleServer()
+SimpleServer::SimpleServer(): server{80}
 {
+    Serial.println("Simple webserver created");
 }
 
 SimpleServer::~SimpleServer()
@@ -67,6 +65,7 @@ void SimpleServer::loop()
 
 AsyncServer::AsyncServer()
 {
+    Serial.println("Async webserver created");
 }
 
 AsyncServer::~AsyncServer()
