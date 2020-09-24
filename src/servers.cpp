@@ -43,29 +43,38 @@ void ParentServer::wifiConnect()
     Serial.println(WiFi.localIP());
 }
 
+// Static initialization
+WebServer SimpleServer::s_wserver(80);
 
-SimpleServer::SimpleServer(): server{80}
+SimpleServer::SimpleServer()
 {
-    Serial.println("Simple webserver created");
 }
 
 SimpleServer::~SimpleServer()
 {
 }
 
+void SimpleServer::handle_notFound()
+{
+    s_wserver.send(404, "text/plain", "Not found");
+}
+
 void SimpleServer::setup()
 {
+    Serial.println("simple setup");
+    s_wserver.onNotFound(SimpleServer::handle_notFound);
 
+    s_wserver.begin();
 }
 
 void SimpleServer::loop()
 {
-
+    Serial.println("simple loop");
+    s_wserver.handleClient();
 }
 
 AsyncServer::AsyncServer()
 {
-    Serial.println("Async webserver created");
 }
 
 AsyncServer::~AsyncServer()
@@ -74,10 +83,10 @@ AsyncServer::~AsyncServer()
 
 void AsyncServer::setup()
 {
-
+    Serial.println("async setup");
 }
 
 void AsyncServer::loop()
 {
-
+    Serial.println("async loop");
 }

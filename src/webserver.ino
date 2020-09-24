@@ -14,7 +14,10 @@
 #include "constants.h"
 #include "servers.h"
 
-ParentServer webserver;
+SimpleServer simpleServer;
+AsyncServer asyncServer;
+
+ParentServer *pServer = nullptr;
 
 void setup()
 {
@@ -23,16 +26,17 @@ void setup()
 
     pinMode(Constants::ledPin, OUTPUT);
 
+    ParentServer::wifiConnect();
+    
     if (Constants::serverType == ServerType::SIMPLE_WEBSERVER)
-        webserver = SimpleServer();
+        pServer = &simpleServer;
     else if (Constants::serverType == ServerType::ASYNC_WEBSERVER)
-        webserver = AsyncServer();
+        pServer = &asyncServer;
 
-    webserver.wifiConnect();
-    webserver.setup();
+    pServer->setup();
 }
 
 void loop()
 {
-    webserver.loop();
+    pServer->loop();
 }

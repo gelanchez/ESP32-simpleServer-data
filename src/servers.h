@@ -22,15 +22,16 @@ class ParentServer
         ~ParentServer();
         virtual void setup();
         virtual void loop();
-        void wifiConnect();
+        static void wifiConnect();
 };
 
 
 class SimpleServer: public ParentServer
 {
     private:
-        WebServer server;
+        static WebServer s_wserver;
     protected:
+        static void handle_notFound();
     public:
         SimpleServer();
         ~SimpleServer();
