@@ -1,9 +1,9 @@
 /**
  * @file webserver.ino
  * @author José Ángel Sánchez (https://github.com/gelanchez)
- * @brief Main implementation of the webserver to control a LED and present
- * data from the sensors to the clients. Two webservers and technologies can
- * be used:
+ * @brief Main implementation of the webserver to control a LED and present.
+ * data from the sensors to the clients.
+ * Two webservers and technologies can be used:
  * a) Simple webserver + jQuery AJAX.
  * b) Async webserver + websockets.
  * @version 0.0.1
@@ -12,12 +12,10 @@
  */
 
 #include "constants.h"
-#include "servers.h"
+#include <WiFi.h>
 
-SimpleServer simpleServer;
-AsyncServer asyncServer;
-
-ParentServer *pServer = nullptr;
+#include "simple_server.h"
+//#include "async_server.h"
 
 void setup()
 {
@@ -26,17 +24,22 @@ void setup()
 
     pinMode(Constants::ledPin, OUTPUT);
 
-    ParentServer::wifiConnect();
-    
-    if (Constants::serverType == ServerType::SIMPLE_WEBSERVER)
-        pServer = &simpleServer;
-    else if (Constants::serverType == ServerType::ASYNC_WEBSERVER)
-        pServer = &asyncServer;
+    /**
+     * @brief Connect to WiFi
+     */
+    WiFi.config(Constants::ip, Constants::gateway, Constants::subnet);
+    WiFi.begin(Constants::ssid, Constants::password);
+    while (WiFi.status() != WL_CONNECTED)
+        delay(1000);
+    Serial.print("Connected to WiFi ");
+    Serial.print(Constants::ssid);
+    Serial.print(" as ");
+    Serial.println(WiFi.localIP());
 
-    pServer->setup();
+    MyServer::setup();
 }
 
 void loop()
 {
-    pServer->loop();
+    MyServer::loop();
 }
