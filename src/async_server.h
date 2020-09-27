@@ -10,7 +10,7 @@
 #ifndef ASYNC_SERVER_H
 #define ASYNC_SERVER_H
 
-namespace MyServer
+namespace MyAsyncServer
 {
     void loop();
     void setup();

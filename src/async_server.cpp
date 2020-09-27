@@ -14,17 +14,17 @@
 
 extern AsyncWebServer g_asyncServer(80);
 
-void MyServer::loop()
+void MyAsyncServer::loop()
 {
 }
 
-void MyServer::setup()
+void MyAsyncServer::setup()
 {
     g_asyncServer.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
         request->send(200, "text/plain", "Hello async");
         });
     g_asyncServer.onNotFound([](AsyncWebServerRequest *request){
-        request->send(404, "text/plain", "Not found");
+        request->send(404, "text/plain", "Not found async");
     });
     g_asyncServer.begin();
 }

@@ -12,9 +12,11 @@
  */
 
 #include <Arduino.h>
-#include "async_server.h"
 #include "constants.h"
 #include <WiFi.h>
+
+#include "async_server.h"
+#include "simple_server.h"
 
 void setup()
 {
@@ -24,7 +26,7 @@ void setup()
     pinMode(Constants::ledPin, OUTPUT);
 
     /**
-     * @brief Connect to WiFi
+     * @brief Connect to WiFi.
      */
     WiFi.config(Constants::ip, Constants::gateway, Constants::subnet);
     WiFi.begin(Constants::ssid, Constants::password);
@@ -35,9 +37,20 @@ void setup()
     Serial.print(" as ");
     Serial.println(WiFi.localIP());
 
-    MyServer::setup();
+    /**
+     * @brief Server setup.
+     */
+    if (Constants::serverType == ServerType::SIMPLE_WEBSERVER)
+        MySimpleServer::setup();
+    else if (Constants::serverType == ServerType::ASYNC_WEBSERVER)
+        MyAsyncServer::setup();
+    
 }
 
 void loop()
 {
+    if (Constants::serverType == ServerType::SIMPLE_WEBSERVER)
+        MySimpleServer::loop();
+    else if (Constants::serverType == ServerType::ASYNC_WEBSERVER)
+        MyAsyncServer::loop();
 }
