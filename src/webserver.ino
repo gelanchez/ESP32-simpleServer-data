@@ -43,8 +43,7 @@ void setup()
     if (Constants::serverType == ServerType::SIMPLE_WEBSERVER)
         MySimpleServer::setup();
     else if (Constants::serverType == ServerType::ASYNC_WEBSERVER)
-        MyAsyncServer::setup();
-    
+        MyAsyncServer::setup();    
 }
 
 void loop()
