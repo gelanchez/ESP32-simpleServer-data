@@ -20,7 +20,7 @@ void MyAsyncServer::loop()
 
 void MyAsyncServer::setup()
 {
-    g_asyncServer.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+    g_asyncServer.on("/hello", HTTP_GET, [](AsyncWebServerRequest *request){
         request->send(200, "text/plain", "Hello async");
         });
     g_asyncServer.onNotFound([](AsyncWebServerRequest *request){

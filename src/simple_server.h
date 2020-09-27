@@ -13,6 +13,7 @@
 namespace MySimpleServer
 {
     void handle_notFound();
+    void handle_hello();
     void loop();
     void setup();
 }
