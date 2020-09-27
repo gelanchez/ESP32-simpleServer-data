@@ -11,15 +11,10 @@
  * @copyright GPL-3.0
  */
 
-#define ESP32
-
 #include <Arduino.h>
-#include <AsyncTCP.h>
-#include <ESPAsyncWebServer.h>
+#include "async_server.h"
 #include "constants.h"
 #include <WiFi.h>
-
-AsyncWebServer g_asyncServer(80);
 
 void setup()
 {
@@ -40,13 +35,7 @@ void setup()
     Serial.print(" as ");
     Serial.println(WiFi.localIP());
 
-    g_asyncServer.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-        request->send(200, "text/plain", "Hello World");
-        });
-    g_asyncServer.onNotFound([](AsyncWebServerRequest *request){
-        request->send(404, "text/plain", "Not found");
-    });
-    g_asyncServer.begin();
+    MyServer::setup();
 }
 
 void loop()
