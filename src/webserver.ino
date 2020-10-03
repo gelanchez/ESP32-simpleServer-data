@@ -11,8 +11,12 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include "constants.h"
+#include "index.h"
 #include <WebServer.h>
 #include <WiFi.h>
+
+bool g_ledStatus(LOW);
+StaticJsonDocument<150> g_ledJson;
 
 WebServer g_server(80);
 
@@ -40,10 +44,10 @@ void setup()
      */
     g_server.onNotFound(handle_notFound);
     g_server.on("/hello", handle_hello);
-    g_server.on("", handle_notFound);
-    g_server.on("/", handle_notFound);
-    g_server.on("/changeled", handle_notFound);
-    g_server.on("/_led_status", handle_notFound);
+    g_server.on("", handle_index);
+    g_server.on("/", handle_index);
+    g_server.on("/changeled", handle_changeLed);
+    g_server.on("/_led_status", handle_ledStatus);
     g_server.begin();
  
 }
@@ -51,14 +55,37 @@ void setup()
 void loop()
 {
     g_server.handleClient();
+    
+    if (g_ledStatus)
+        digitalWrite(Constants::ledPin, HIGH);
+    else
+        digitalWrite(Constants::ledPin, LOW);
 }
 
 void handle_notFound()
 {
-    g_server.send(404, "text/plain", "Not found simple");
+    g_server.send(404, "text/plain", "Not found");
 }
 
 void handle_hello()
 {
-    g_server.send(200, "text/plain", "Hello simple");
+    g_server.send(200, "text/plain", "Hello world");
+}
+
+void handle_index()
+{
+    g_server.send(200, "text/html", MAIN_page);
+}
+
+void handle_changeLed()
+{
+    g_ledStatus = !g_ledStatus;
+}
+
+void handle_ledStatus()
+{
+    String output;
+    g_ledJson["ledStatus"] = g_ledStatus;
+    serializeJson(g_ledJson, output);
+    g_server.send(200, "text/json", output);
 }
