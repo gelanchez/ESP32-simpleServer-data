@@ -1,10 +1,12 @@
 # ESP32-simpleServer-data
-This repository contains an implementation of a simple HTTP webserver for an ESP32 microcontroller. The ESP32, connected to a WiFi network, is used to control a LED and read and process the values from a thermistor and a photoresistor. The control and values are communicated to the client connected to the webserver using jQuery AJAX.
+This repository contains an implementation of a simple HTTP webserver for an ESP32 microcontroller. The ESP32, connected to a WiFi network, is used to control a LED and read and process the values from a thermistor and a photoresistor. The control and values are sent to the client connected to the webserver using jQuery AJAX.
 
-Apart from the Async server and websockets, the following technologies are used:
-- [JSON](https://www.json.org/json-en.html) data format is used as standard.
+The following technologies are used:
+- [JSON](https://www.json.org/json-en.html) data format.
 - [charts.js](https://www.chartjs.org/) for data presentation.
-- [Bootstrap](https://getbootstrap.com/), the CSS framework, decorates the webpages.
+- [Bootstrap](https://getbootstrap.com/) CSS framework.
+
+## Website appearance
 
 ## Schematic
 The following parts have been used in the electronic circuit. Nevertheless, they can be replaced by other similar ones with little change in the code.
@@ -16,7 +18,8 @@ The following parts have been used in the electronic circuit. Nevertheless, they
 
 <img src="./ESP32-web-data_schem.svg" alt="Electrical schematic" width="100%" height="auto">
 ESP32 pins in the schematic are referred as 3.3V, GND and D*.
-Note: ESP32 ADC2 pins cannot be used when Wi-Fi is used.
+
+*Note: ESP32 ADC2 pins cannot be used when Wi-Fi is used.*
 
 ## Requirements
 ESP32 libraries:
@@ -27,11 +30,12 @@ External libraries:
 - [ArduinoJson](https://arduinojson.org). JSON library for embedded C++.
 
 ## Usage
-1. Connect the ESP32 as showed in the schematics.
+1. Build the circuit as shown in the schematic.
 2. Install the standard ESP libraries either using the Arduino IDE or directly from [Espressif](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/).
 3. Install the required external libraries.
 4. Download the repository and rename the file *constants.h.TEMPLATE* to *constants.h*.
-    - Change the SSID and PASSWORD correspoding to the WiFi network. 
+    - Change the SSID and PASSWORD correspoding to the WiFi network.
+    - Change the IP address and gateway if necessary in *constants.h* and *index.h*.
 5. Flash the ESP32:
     - For VSCode, modify the *arduino.json* and *c_cpp_properties.json* files to add the missing libraries.
     - For the Arduino IDE, change the *src* folder to match the name of the *.ino* file.
