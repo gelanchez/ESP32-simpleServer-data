@@ -1,22 +1,24 @@
 /**
  * @file webserver.ino
  * @author José Ángel Sánchez (https://github.com/gelanchez)
- * @brief Main implementation of the webserver to control a LED and present.
- * data from the sensors to the clients.
- * Two webservers and technologies can be used:
- * a) Simple webserver + jQuery AJAX.
- * b) Async webserver + websockets.
+ * @brief Main implementation of the simple webserver to control a LED and present
+ * data from the sensors to the clients using jQuery AJAX.
  * @version 0.0.1
- * @date 2020-09-20
+ * @date 2020-09-29
  * @copyright GPL-3.0
  */
 
 #include <Arduino.h>
+#include <ArduinoJson.h>
 #include "constants.h"
+#include "index.h"
+#include <WebServer.h>
 #include <WiFi.h>
 
-#include "async_server.h"
-#include "simple_server.h"
+bool g_ledStatus(LOW);
+StaticJsonDocument<150> g_ledJson;
+
+WebServer g_server(80);
 
 void setup()
 {
@@ -40,16 +42,50 @@ void setup()
     /**
      * @brief Server setup.
      */
-    if (Constants::serverType == ServerType::SIMPLE_WEBSERVER)
-        MySimpleServer::setup();
-    else if (Constants::serverType == ServerType::ASYNC_WEBSERVER)
-        MyAsyncServer::setup();    
+    g_server.onNotFound(handle_notFound);
+    g_server.on("/hello", handle_hello);
+    g_server.on("", handle_index);
+    g_server.on("/", handle_index);
+    g_server.on("/changeled", handle_changeLed);
+    g_server.on("/_led_status", handle_ledStatus);
+    g_server.begin();
+ 
 }
 
 void loop()
 {
-    if (Constants::serverType == ServerType::SIMPLE_WEBSERVER)
-        MySimpleServer::loop();
-    else if (Constants::serverType == ServerType::ASYNC_WEBSERVER)
-        MyAsyncServer::loop();
+    g_server.handleClient();
+    
+    if (g_ledStatus)
+        digitalWrite(Constants::ledPin, HIGH);
+    else
+        digitalWrite(Constants::ledPin, LOW);
+}
+
+void handle_notFound()
+{
+    g_server.send(404, "text/plain", "Not found");
+}
+
+void handle_hello()
+{
+    g_server.send(200, "text/plain", "Hello world");
+}
+
+void handle_index()
+{
+    g_server.send(200, "text/html", MAIN_page);
+}
+
+void handle_changeLed()
+{
+    g_ledStatus = !g_ledStatus;
+}
+
+void handle_ledStatus()
+{
+    String output;
+    g_ledJson["ledStatus"] = g_ledStatus;
+    serializeJson(g_ledJson, output);
+    g_server.send(200, "text/json", output);
 }

@@ -13,22 +13,10 @@
 #include <WiFi.h>
 
 /**
- * @brief Types of server that can be used
- */
-enum class ServerType
-{
-    SIMPLE_WEBSERVER,
-    ASYNC_WEBSERVER
-};
-
-/**
  * @brief Constants
  */
 namespace Constants
 {
-    // Server type (TO BE MODIFIED)
-    const ServerType serverType(ServerType::SIMPLE_WEBSERVER);
-
     // ESP32 constants
     const uint16_t resolution(4095);  // Max analog value
     const float maxVoltage(3.3);  // Max voltage
@@ -41,17 +29,17 @@ namespace Constants
     const IPAddress subnet(255, 255, 255, 0); 
 
     // LED
-    const uint8_t ledPin(4);
+    const uint8_t ledPin(13);
 
     // Thermistor MF52A
-    const uint8_t thermistorPin(18);  // Connected through a voltage divider
+    const uint8_t thermistorPin(32);  // Connected through a voltage divider
     const uint16_t beta(3950);
     const uint16_t resitanceTherm(1000);  // 1 kohm
     const float parameterB(3950);  // Simplified B parameter equation from Steinhart-Hart equation
     const float parameterR0(23000);
 
     // Photoresistor
-    const uint8_t photoresistorPin(22);  // Connected through a voltage divider
+    const uint8_t photoresistorPin(34);  // Connected through a voltage divider
     const uint16_t resistancePhoto(10000);  // 10 kohm
     const float minResistance(1);
     // 100 kohm @ 1 lx and 30 kohm @ 10 lx (See graph)
