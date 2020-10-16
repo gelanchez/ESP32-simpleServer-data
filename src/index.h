@@ -31,7 +31,7 @@ const char MAIN_page[] PROGMEM = R"=====(
 </head>
 
 <body>
-    <h4 style="text-align:center">ESP32 simple server with AJAX</h4>
+    <h4 style="text-align:center"><u>ESP32 simple server with AJAX</u></h4>
     <p style="text-align:center">
         <b>LED: &nbsp;</b><input id ="ledbutton" class="btn btn-dark btn-sm" type="submit" value="Turn LED on" onclick="changeLed();" style="margin-right: 2em">
     </p>
@@ -49,23 +49,23 @@ const char MAIN_page[] PROGMEM = R"=====(
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
     <script type="text/javascript">
-        function changeLed(){
+        function changeLed() {
             $.ajax({
                 type: "post",
                 url: "/changeled",
                 data: {},
-                complete: function(){
+                complete: function() {
                     getLedStatus();
                 }
             });
         }
-        function getLedStatus(){
+        function getLedStatus() {
             $.ajax({
                 url: "/_led_status",
                 dataType: "json",
-                success: function(data){
+                success: function(data) {
                     // const jsondata = JSON.parse(data);  // Not necessary as AJAX dataType is json
-                    if (data.ledStatus == true){
+                    if (data.ledStatus == true) {
                         updateButton(true);
                     }
                     else {
@@ -74,13 +74,13 @@ const char MAIN_page[] PROGMEM = R"=====(
                 }
             });
         }
-        function updateButton(ledStatus){
+        function updateButton(ledStatus) {
             if (ledStatus){
-                document.getElementById("ledbutton").className = "btn btn-warning btn-lg";
+                document.getElementById("ledbutton").className = "btn btn-warning btn-sm";
                 document.getElementById("ledbutton").value = "Switch LED off";
             }
             else {
-                document.getElementById("ledbutton").className = "btn btn-dark btn-lg";
+                document.getElementById("ledbutton").className = "btn btn-dark btn-sm";
                 document.getElementById("ledbutton").value = "Switch LED on";
             }
         }
