@@ -19,22 +19,23 @@ const char MAIN_page[] PROGMEM = R"=====(
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
+    <title>ESP32-simpleServer-data</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="José Ángel">
+    <meta name="description" content="ESP32 simple webserver data sensor">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-    <title>ESP32 WiFi LED control</title>
 </head>
 
 <body>
-    <h4>ESP32 LED control</h4>
-
-    <input id ="ledbutton" class="btn btn-dark btn-lg" type="submit" value="Switch LED on" onclick="changeLed();">
-
+    <h4 style="text-align:center">ESP32 simple server with AJAX</h4>
+    <p style="text-align:center">
+        <b>LED: &nbsp;</b><input id ="ledbutton" class="btn btn-dark btn-sm" type="submit" value="Turn LED on" onclick="changeLed();" style="margin-right: 2em">
+    </p>
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- Not using the jQuery slim version as it doesn't have AJAX-->
