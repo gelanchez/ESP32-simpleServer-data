@@ -25,7 +25,10 @@ const char MAIN_page[] PROGMEM = R"=====(
     <meta name="description" content="ESP32 simple webserver data sensor">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <style>
-        html {text-align: center;}
+        html {
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
         #title {
             margin: 0px auto;
             text-decoration: underline;
