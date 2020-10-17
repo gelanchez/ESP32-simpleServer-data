@@ -16,7 +16,7 @@
 #include <WiFi.h>
 
 bool g_ledStatus(LOW);
-StaticJsonDocument<150> g_ledJson;
+StaticJsonDocument<100> g_ledJson;
 
 WebServer g_server(80);
 

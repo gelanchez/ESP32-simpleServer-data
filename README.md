@@ -4,7 +4,6 @@ This repository contains an implementation of a simple HTTP webserver for an ESP
 The following technologies are used:
 - [JSON](https://www.json.org/json-en.html) data format.
 - [charts.js](https://www.chartjs.org/) for data presentation.
-- [Bootstrap](https://getbootstrap.com/) CSS framework.
 
 ## Website appearance
 
