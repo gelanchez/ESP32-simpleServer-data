@@ -1,9 +1,7 @@
 # ESP32-simpleServer-data
-This repository contains an implementation of a simple HTTP webserver for an ESP32 microcontroller. The ESP32, connected to a WiFi network, is used to control a LED and read and process the values from a thermistor and a photoresistor. The control and values are sent to the client connected to the webserver using jQuery AJAX.
+This repository contains an implementation of a simple HTTP webserver for an ESP32 microcontroller. The ESP32, connected to a WiFi network, is used to control a LED as well as read and process the values from a thermistor and a photoresistor.
 
-The following technologies are used:
-- [JSON](https://www.json.org/json-en.html) data format.
-- [charts.js](https://www.chartjs.org/) for data presentation.
+The communication between the clients and the webserver is done using [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) with [jQuery](https://jquery.com/) in the clients. [JSON](https://www.json.org/json-en.html) is used as data format and [charts.js](https://www.chartjs.org/) for data visualization.
 
 ## Website appearance
 

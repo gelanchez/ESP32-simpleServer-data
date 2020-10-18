@@ -49,13 +49,12 @@ void setup()
     g_server.on("/changeled", handle_changeLed);
     g_server.on("/_led_status", handle_ledStatus);
     g_server.begin();
- 
 }
 
 void loop()
 {
     g_server.handleClient();
-    
+
     if (g_ledStatus)
         digitalWrite(Constants::ledPin, HIGH);
     else

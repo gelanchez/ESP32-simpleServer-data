@@ -11,7 +11,7 @@
 #define INDEX_H
 
 /**
- * @brief Main html page.
+ * @brief main.html, main.js and styles.css in one char array.
  */
 const char MAIN_page[] PROGMEM = R"=====(
 
@@ -21,8 +21,8 @@ const char MAIN_page[] PROGMEM = R"=====(
     <title>ESP32-simpleServer-data</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="José Ángel">
     <meta name="description" content="ESP32 simple webserver data sensor">
+    <meta name="author" content="José Ángel Sánchez">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <style>
         html {
@@ -47,8 +47,7 @@ const char MAIN_page[] PROGMEM = R"=====(
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script type="text/javascript">
         // Draw LED
-        var canvasLED = document.getElementById("led");
-        var contextLED = canvasLED.getContext("2d");
+        var contextLED = document.getElementById("led").getContext("2d");
         contextLED.arc(25, 25, 15, 0, Math.PI * 2, false);
         contextLED.lineWidth = 3;
         contextLED.strokeStyle = "black";
