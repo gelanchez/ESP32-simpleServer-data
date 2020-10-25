@@ -17,6 +17,7 @@ const char MAIN_page[] PROGMEM = R"=====(
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>ESP32-simpleServer-data</title>
     <meta charset="utf-8">
@@ -29,14 +30,22 @@ const char MAIN_page[] PROGMEM = R"=====(
             text-align: center;
             font-family: Arial, Helvetica, sans-serif;
         }
+
         #title {
             margin: 0px auto;
             text-decoration: underline;
         }
-        #data { margin: 5px auto;}
-        #led { margin-bottom: -20px;}
+
+        #data {
+            margin: 5px auto;
+        }
+
+        #led {
+            margin-bottom: -20px;
+        }
     </style>
 </head>
+
 <body>
     <h2 id="title">ESP32 simple server with AJAX</h2>
     <p id="data">
@@ -54,7 +63,8 @@ const char MAIN_page[] PROGMEM = R"=====(
         <canvas id="illuminanceChart" width="800" height="200" aria-label="Illuminance chart" role="img"></canvas>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"
         integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg=="
         crossorigin="anonymous"></script>
@@ -123,7 +133,7 @@ const char MAIN_page[] PROGMEM = R"=====(
                 responsiveAnimationDuration: 0  // animation duration after a resize
             }
         });
-        
+
         var ctxIllum = document.getElementById('illuminanceChart').getContext('2d');
         var illuminanceChart = new Chart(ctxIllum, {
             type: 'line',
@@ -177,7 +187,7 @@ const char MAIN_page[] PROGMEM = R"=====(
                 type: "post",
                 url: "/changeled",
                 data: {},
-                complete: function() {
+                complete: function () {
                     getLedStatus();
                 }
             });
@@ -186,7 +196,7 @@ const char MAIN_page[] PROGMEM = R"=====(
             $.ajax({
                 url: "/_led_status",
                 dataType: "json",
-                success: function(data) {
+                success: function (data) {
                     // const jsondata = JSON.parse(data);  // Not necessary as AJAX dataType is json
                     if (data.ledStatus == true) {
                         updateLED(true);
@@ -198,7 +208,7 @@ const char MAIN_page[] PROGMEM = R"=====(
             });
         }
         function updateLED(ledStatus) {
-            if (ledStatus){
+            if (ledStatus) {
                 contextLED.fillStyle = "red";
                 contextLED.fill();
             }
@@ -212,7 +222,7 @@ const char MAIN_page[] PROGMEM = R"=====(
             $.ajax({
                 url: "/_sensors",
                 dataType: "json",
-                success: function(data) {
+                success: function (data) {
                     document.getElementById("temperature").innerHTML = data.temperature;
                     document.getElementById("illuminance").innerHTML = data.illuminance;
                     updateCharts(data.temperature, data.illuminance);
@@ -234,7 +244,7 @@ const char MAIN_page[] PROGMEM = R"=====(
                 removeData(illuminanceChart);
             }
         }
-        
+
         function addData(chart, label, data) {
             chart.data.labels.push(label);
             chart.data.datasets.forEach((dataset) => {
@@ -242,7 +252,7 @@ const char MAIN_page[] PROGMEM = R"=====(
             });
             chart.update();
         }
-        
+
         function removeData(chart) {
             chart.data.labels.shift();
             chart.data.datasets.forEach((dataset) => {
@@ -251,9 +261,10 @@ const char MAIN_page[] PROGMEM = R"=====(
             chart.update();
         }
 
-        window.setInterval(updateValues, 2000); // Update values used when testing
+        window.setInterval(updateValues, 2000);
     </script>
 </body>
+
 </html>
 
 )=====";
