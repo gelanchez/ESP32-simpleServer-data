@@ -72,6 +72,108 @@ const char MAIN_page[] PROGMEM = R"=====(
         var temperature = 0;
         var illuminance = 0;
 
+        var ctxTemp = document.getElementById('temperatureChart').getContext('2d');
+        var temperatureChart = new Chart(ctxTemp, {
+            type: 'line',
+            data: {
+                //labels: [1, 2, 3],
+                datasets: [{
+                    label: 'Temperature',
+                    borderColor: 'red',
+                    backgroundColor: 'red',
+                    borderWidth: 2,
+                    pointRadius: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        ticks: {
+                            display: true
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Temperature (ºC)'
+                        },
+                        ticks: {
+                            min: 0,
+                            max: 40
+                        }
+                    }]
+                },
+                showLines: true,
+                elements: {
+                    line: {
+                        tension: 0  // disables bezier curves
+                    }
+                },
+                animation: {
+                    duration: 0  // general animation time
+                },
+                hover: {
+                    animationDuration: 0  // duration of animations when hovering an item
+                },
+                responsiveAnimationDuration: 0  // animation duration after a resize
+            }
+        });
+        
+        var ctxIllum = document.getElementById('illuminanceChart').getContext('2d');
+        var illuminanceChart = new Chart(ctxIllum, {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: 'Illuminance',
+                    borderColor: 'gold',
+                    backgroundColor: 'gold',
+                    borderWidth: 2,
+                    pointRadius: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        ticks: {
+                            display: true
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Illuminance (lux)'
+                        },
+                        ticks: {
+                            min: 0,
+                            max: 10000
+                        }
+                    }]
+                },
+                showLines: true,
+                animation: {
+                    duration: 0  // general animation time
+                },
+                hover: {
+                    animationDuration: 0  // duration of animations when hovering an item
+                },
+                responsiveAnimationDuration: 0  // animation duration after a resize
+            }
+        });
+
         function changeLed() {
             $.ajax({
                 type: "post",
