@@ -42,6 +42,8 @@
         integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg=="
         crossorigin="anonymous"></script>
     <script type="text/javascript">
+        var counter = 0;
+
         // Draw LED
         var contextLED = document.getElementById("led").getContext("2d");
         contextLED.arc(25, 25, 15, 0, Math.PI * 2, false);
@@ -50,10 +52,6 @@
         contextLED.fillStyle = "black";
         contextLED.stroke();
         contextLED.fill();
-
-        // Sensors values
-        var temperature = 0;
-        var illuminance = 0;
 
         var ctxTemp = document.getElementById('temperatureChart').getContext('2d');
         var temperatureChart = new Chart(ctxTemp, {
@@ -193,21 +191,47 @@
             }
         }
 
-        function getSensors() {
+        function updateValues() {
             $.ajax({
                 url: "/_sensors",
                 dataType: "json",
                 success: function(data) {
-                    temperature = data.temperature;
-                    illuminance = data.illuminance;
+                    document.getElementById("temperature").innerHTML = data.temperature;
+                    document.getElementById("illuminance").innerHTML = data.illuminance;
+                    updateCharts(data.temperature, data.illuminance);
                 }
             });
         }
 
-        function updateValues() {
-            getSensors();
-            document.getElementById("temperature").innerHTML = temperature;
-            document.getElementById("illuminance").innerHTML = illuminance;
+        function updateCharts(temperature, illuminance) {
+            let date = new Date();
+            let timeDislpayed = date.getMinutes().toString().padStart(2, '0') + ":" + date.getSeconds().toString().padStart(2, '0');
+            addData(temperatureChart, timeDislpayed, [temperature]);
+            addData(illuminanceChart, timeDislpayed, [illuminance]);
+            // Remove values from chart after 100 data
+            if (counter < 100) {
+                counter++;
+            }
+            else {
+                removeData(temperatureChart);
+                removeData(illuminanceChart);
+            }
+        }
+        
+        function addData(chart, label, data) {
+            chart.data.labels.push(label);
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.push(data);
+            });
+            chart.update();
+        }
+        
+        function removeData(chart) {
+            chart.data.labels.shift();
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.shift();
+            });
+            chart.update();
         }
 
         window.setInterval(updateValues, 2000); // Update values used when testing
