@@ -42,9 +42,22 @@ const char MAIN_page[] PROGMEM = R"=====(
     <p id="data">
         <button id="ledButton" onclick="changeLed()">Toggle LED</button>
         <canvas id="led" width="50" height="50"></canvas>
+        <span>SENSORS: Temperature: </span><span id="temperature">0</span><span>°C. Illuminance: </span><span
+            id="illuminance">0</span><span> lx.</span>
     </p>
 
+    <div class="chart-container" style="position: relative; width:95vw; margin:auto">
+        <canvas id="temperatureChart" width="800" height="200" aria-label="Temperature chart" role="img"></canvas>
+    </div>
+    <br>
+    <div class="chart-container" style="position: relative; width:95vw; margin:auto">
+        <canvas id="illuminanceChart" width="800" height="200" aria-label="Illuminance chart" role="img"></canvas>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"
+        integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg=="
+        crossorigin="anonymous"></script>
     <script type="text/javascript">
         // Draw LED
         var contextLED = document.getElementById("led").getContext("2d");
@@ -54,6 +67,10 @@ const char MAIN_page[] PROGMEM = R"=====(
         contextLED.fillStyle = "black";
         contextLED.stroke();
         contextLED.fill();
+
+        // Sensors values
+        var temperature = 0;
+        var illuminance = 0;
 
         function changeLed() {
             $.ajax({
@@ -72,15 +89,15 @@ const char MAIN_page[] PROGMEM = R"=====(
                 success: function(data) {
                     // const jsondata = JSON.parse(data);  // Not necessary as AJAX dataType is json
                     if (data.ledStatus == true) {
-                        updateButton(true);
+                        updateLED(true);
                     }
                     else {
-                        updateButton(false);
+                        updateLED(false);
                     }
                 }
             });
         }
-        function updateButton(ledStatus) {
+        function updateLED(ledStatus) {
             if (ledStatus){
                 contextLED.fillStyle = "red";
                 contextLED.fill();
@@ -90,6 +107,25 @@ const char MAIN_page[] PROGMEM = R"=====(
                 contextLED.fill();
             }
         }
+
+        function getSensors() {
+            $.ajax({
+                url: "/_sensors",
+                dataType: "json",
+                success: function(data) {
+                    temperature = data.temperature;
+                    illuminance = data.illuminance;
+                }
+            });
+        }
+
+        function updateValues() {
+            getSensors();
+            document.getElementById("temperature").innerHTML = temperature;
+            document.getElementById("illuminance").innerHTML = illuminance;
+        }
+
+        window.setInterval(updateValues, 2000); // Update values used when testing
     </script>
 </body>
 </html>

@@ -51,6 +51,10 @@
         contextLED.stroke();
         contextLED.fill();
 
+        // Sensors values
+        var temperature = 0;
+        var illuminance = 0;
+
         function changeLed() {
             $.ajax({
                 type: "post",
@@ -86,6 +90,25 @@
                 contextLED.fill();
             }
         }
+
+        function getSensors() {
+            $.ajax({
+                url: "/_sensors",
+                dataType: "json",
+                success: function(data) {
+                    temperature = data.temperature;
+                    illuminance = data.illuminance;
+                }
+            });
+        }
+
+        function updateValues() {
+            getSensors();
+            document.getElementById("temperature").innerHTML = temperature;
+            document.getElementById("illuminance").innerHTML = illuminance;
+        }
+
+        window.setInterval(updateValues, 2000); // Update values used when testing
     </script>
 </body>
 </html>
