@@ -20,8 +20,7 @@ bool g_ledStatus(LOW);
 Photoresistor g_photoresistor(Constants::photoresistorPin);
 Thermistor g_thermistor(Constants::thermistorPin);
 
-StaticJsonDocument<100> g_ledJson;
-StaticJsonDocument<100> g_sensorsJson;
+StaticJsonDocument<150> g_dataJson;
 
 WebServer g_server(80);
 
@@ -59,7 +58,6 @@ void setup()
     g_server.on("", handle_index);
     g_server.on("/", handle_index);
     g_server.on("/changeled", handle_changeLed);
-    g_server.on("/_led_status", handle_ledStatus);
     g_server.on("/_sensors", handle_sensors);
     g_server.begin();
 }
@@ -92,21 +90,17 @@ void handle_index()
 void handle_changeLed()
 {
     g_ledStatus = !g_ledStatus;
-}
-
-void handle_ledStatus()
-{
     String output;
-    g_ledJson["ledStatus"] = g_ledStatus;
-    serializeJson(g_ledJson, output);
+    g_dataJson["ledStatus"] = g_ledStatus;
+    serializeJson(g_dataJson, output);
     g_server.send(200, "text/json", output);
 }
 
 void handle_sensors()
 {
     String output;
-    g_sensorsJson["temperature"] = g_thermistor.read();
-    g_sensorsJson["illuminance"] = g_photoresistor.read();
-    serializeJson(g_sensorsJson, output);
+    g_dataJson["temperature"] = g_thermistor.read();
+    g_dataJson["illuminance"] = g_photoresistor.read();
+    serializeJson(g_dataJson, output);
     g_server.send(200, "text/json", output);
 }

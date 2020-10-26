@@ -183,39 +183,17 @@ const char MAIN_page[] PROGMEM = R"=====(
         });
 
         function changeLed() {
-            $.ajax({
-                type: "post",
-                url: "/changeled",
-                data: {},
-                complete: function () {
-                    getLedStatus();
+            $.post("/changeled", function (data, status) {
+                if (data.ledStatus) {
+                    contextLED.fillStyle = "red";
+                    contextLED.fill();
                 }
-            });
-        }
-        function getLedStatus() {
-            $.ajax({
-                url: "/_led_status",
-                dataType: "json",
-                success: function (data) {
-                    // const jsondata = JSON.parse(data);  // Not necessary as AJAX dataType is json
-                    if (data.ledStatus == true) {
-                        updateLED(true);
-                    }
-                    else {
-                        updateLED(false);
-                    }
+                else {
+                    contextLED.fillStyle = "black";
+                    contextLED.fill();
                 }
-            });
-        }
-        function updateLED(ledStatus) {
-            if (ledStatus) {
-                contextLED.fillStyle = "red";
-                contextLED.fill();
-            }
-            else {
-                contextLED.fillStyle = "black";
-                contextLED.fill();
-            }
+            },
+                "json");
         }
 
         function updateValues() {
