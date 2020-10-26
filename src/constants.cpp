@@ -7,4 +7,4 @@
  * @copyright GPL-3.0
  */
 
-#include "constants.h"  // A code file should #include its paired header file (if it exists)
+#include "constants.h" // A code file should #include its paired header file (if it exists)

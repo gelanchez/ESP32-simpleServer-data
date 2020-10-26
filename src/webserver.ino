@@ -12,11 +12,15 @@
 #include <ArduinoJson.h>
 #include "constants.h"
 #include "index.h"
+#include "mysensors.h"
 #include <WebServer.h>
 #include <WiFi.h>
 
 bool g_ledStatus(LOW);
-StaticJsonDocument<150> g_ledJson;
+Photoresistor g_photoresistor(Constants::photoresistorPin);
+Thermistor g_thermistor(Constants::thermistorPin);
+
+StaticJsonDocument<150> g_dataJson;
 
 WebServer g_server(80);
 
@@ -26,6 +30,13 @@ void setup()
     delay(1000);
 
     pinMode(Constants::ledPin, OUTPUT);
+
+    // First sensors reads to initialize values
+    for (int i = 0; i < 5; i++)
+    {
+        g_thermistor.read();
+        g_photoresistor.read();
+    }
 
     /**
      * @brief Connect to WiFi.
@@ -47,15 +58,14 @@ void setup()
     g_server.on("", handle_index);
     g_server.on("/", handle_index);
     g_server.on("/changeled", handle_changeLed);
-    g_server.on("/_led_status", handle_ledStatus);
+    g_server.on("/_sensors", handle_sensors);
     g_server.begin();
- 
 }
 
 void loop()
 {
     g_server.handleClient();
-    
+
     if (g_ledStatus)
         digitalWrite(Constants::ledPin, HIGH);
     else
@@ -80,12 +90,17 @@ void handle_index()
 void handle_changeLed()
 {
     g_ledStatus = !g_ledStatus;
+    String output;
+    g_dataJson["ledStatus"] = g_ledStatus;
+    serializeJson(g_dataJson, output);
+    g_server.send(200, "text/json", output);
 }
 
-void handle_ledStatus()
+void handle_sensors()
 {
     String output;
-    g_ledJson["ledStatus"] = g_ledStatus;
-    serializeJson(g_ledJson, output);
+    g_dataJson["temperature"] = g_thermistor.read();
+    g_dataJson["illuminance"] = g_photoresistor.read();
+    serializeJson(g_dataJson, output);
     g_server.send(200, "text/json", output);
 }
