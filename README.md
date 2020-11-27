@@ -4,6 +4,7 @@ This repository contains an implementation of a simple HTTP webserver for an ESP
 The communication between the clients and the webserver is done using [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) with [jQuery](https://jquery.com/) in the clients. [JSON](https://www.json.org/json-en.html) is used as data format and [charts.js](https://www.chartjs.org/) for data visualization.
 
 ## Website appearance
+<img src="./ESP32-simpleServer-data_screenshot.png" alt="Website appearance" width="100%" height="auto">
 
 ## Schematic
 The following parts have been used in the electronic circuit. Nevertheless, they can be replaced by other similar ones with little change in the code.
